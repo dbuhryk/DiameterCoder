@@ -33,3 +33,20 @@ Message(
       AVP("Result-Code",2001)
     )
 ```
+
+AVP types available:
+* Grouped
+* Integer32
+* IP Address
+* Unsigned32 (via Integer32)
+* UTF String
+* Vendor (via Integer32)
+* Diameter Identity (via UTF String)
+* Enumerated (via Integer32)
+
+Data type codecs available:
+* Groupped AVP
+* Enumerated AVP
+* Integer32
+* IP Address
+* UTFString
