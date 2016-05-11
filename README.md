@@ -5,7 +5,7 @@ Diameter message Encoder/Decoder
 
 Main features:
 * Coder follows [RFC 7633](https://tools.ietf.org/html/rfc6733)
-* Dictionary can be loaded from [Wireshark](https://www.wireshark.org/) Diameter dictionary (dictionary.xml with all dependencies) 
+* Dictionary can be loaded from [Wireshark](https://www.wireshark.org/) Diameter dictionary (`dictionary.xml` with all dependencies) 
 
 Usage example1:
 ```
