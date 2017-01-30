@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<application id="4" name="Diameter Credit Control Application" uri="http://www.ietf.org/rfc/rfc4006.txt">
+    <avp name="Ericsson-Service-Information" code="285" mandatory="must" vendor-bit="must" vendor-id="Ericsson" may-encrypt="no" protected="mustnot">
+        <grouped>
+            <gavp name="IMS-Service-Identification"/>
+            <gavp name="MMT-Information"/>
+            <gavp name="Transaction-Info"/>
+            <gavp name="UHTZ-Offset"/>
+        </grouped>
+    </avp>
+     <avp name="Supplementary-Service-Information" code="1129" mandatory="must" vendor-bit="must" vendor-id="Ericsson" may-encrypt="no" protected="mustnot">
+        <grouped>
+            <gavp name="Supplementary-Service-Identity"/>
+            <gavp name="Supplementary-Service-Action"/>
+            <gavp name="Common-Policy-Rule-Identity"/>
+            <gavp name="Redirecting-Party-Address"/>
+            <gavp name="Routing-Call-Type"/>
+            <gavp name="Service-Suppression-Info"/>
+            <gavp name="CUG-Information"/>
+        </grouped>
+    </avp>
+    <avp name="IMS-Service-Identification" code="284" mandatory="must" vendor-bit="must" vendor-id="Ericsson" may-encrypt="no" protected="mustnot">
+        <type type-name="UTF8String"/>
+    </avp>
+    <avp name="MMT-Information" code="1061" mandatory="must" vendor-bit="must" vendor-id="Ericsson" may-encrypt="no" protected="mustnot">
+        <grouped>
+            <gavp name="Analyzed-Call-Type"/>
+            <gavp name="Called-Asserted-Identity-Presentation-Status"/>
+            <gavp name="Calling-Party-Address-Presentation-Status"/>
+            <gavp name="Carrier-Select-Routing-Information"/>
+            <gavp name="Conference-Id"/>
+            <gavp name="Dial-Around-Indicator"/>
+            <gavp name="From-Header"/>
+            <gavp name="From-Header-Presentation-Status"/>
+            <gavp name="Related-ICID"/>
+            <gavp name="Served-User"/>
+            <gavp name="Service-Number-Type"/>
+            <gavp name="SIP-Request-Timestamp-Fraction"/>
+            <gavp name="SIP-Response-Timestamp-Fraction"/>
+            <gavp name="SIP-Ringing-Timestamp"/>
+            <gavp name="SIP-Ringing-Timestamp-Fraction"/>
+        </grouped>
+    </avp>
+    <avp name="Analyzed-Call-Type" code="1303" mandatory="must" vendor-bit="must" vendor-id="Ericsson" may-encrypt="no" protected="mustnot">
+        <type type-name="UTF8String"/>
+    </avp>
+    <avp name="Called-Asserted-Identity-Presentation-Status" code="1142" mandatory="must" vendor-bit="must" vendor-id="Ericsson" may-encrypt="no" protected="mustnot">
+        <type type-name="Enumerated"/>
+        <enum name="Presentation Allowed" code="0"/>
+        <enum name="Presentation Restricted" code="1"/>
+    </avp>
+    <avp name="Calling-Party-Address-Presentation-Status" code="1141" mandatory="must" vendor-bit="must" vendor-id="Ericsson" may-encrypt="no" protected="mustnot">
+        <type type-name="Enumerated"/>
+        <enum name="Presentation Allowed" code="0"/>
+        <enum name="Presentation Restricted" code="1"/>
+        <enum name="Unknown" code="2"/>
+    </avp>
+    <avp name="Carrier-Select-Routing-Information" code="1303" mandatory="must" vendor-bit="must" vendor-id="Ericsson" may-encrypt="no" protected="mustnot">
+        <type type-name="UTF8String"/>
+    </avp>
+    <avp name="Conference-Id" code="1127" mandatory="must" vendor-bit="must" vendor-id="Ericsson" may-encrypt="no" protected="mustnot">
+        <type type-name="UTF8String"/>
+    </avp>
+    <avp name="Dial-Around-Indicator" code="1160" mandatory="must" vendor-bit="must" vendor-id="Ericsson" may-encrypt="no" protected="mustnot">
+        <type type-name="UTF8String"/>
+    </avp>
+    <avp name="From-Header" code="1153" mandatory="must" vendor-bit="must" vendor-id="Ericsson" may-encrypt="no" protected="mustnot">
+        <type type-name="UTF8String"/>
+    </avp>    
+    <avp name="From-Header-Presentation-Status" code="1262" mandatory="must" vendor-bit="must" vendor-id="Ericsson" may-encrypt="no" protected="mustnot">
+        <type type-name="UTF8String"/>
+    </avp>
+    <avp name="Related-ICID" code="1128" mandatory="must" vendor-bit="must" vendor-id="Ericsson" may-encrypt="no" protected="mustnot">
+        <type type-name="UTF8String"/>
+    </avp>
+    <avp name="Served-User" code="1330" mandatory="must" vendor-bit="must" vendor-id="Ericsson" may-encrypt="no" protected="mustnot">
+        <type type-name="UTF8String"/>
+    </avp>
+    <avp name="Service-Number-Type" code="1307" mandatory="must" vendor-bit="must" vendor-id="Ericsson" may-encrypt="no" protected="mustnot">
+        <type type-name="UTF8String"/>
+    </avp>
+    <avp name="SIP-Request-Timestamp-Fraction" code="2301" mandatory="must" vendor-bit="must" vendor-id="TGPP" may-encrypt="no" protected="mustnot">
+        <type type-name="Unsigned32"/>
+    </avp>
+    <avp name="SIP-Response-Timestamp-Fraction" code="2302" mandatory="must" vendor-bit="must" vendor-id="Ericsson" may-encrypt="no" protected="mustnot">
+        <type type-name="Unsigned32"/>
+    </avp>
+    <avp name="SIP-Ringing-Timestamp" code="338" mandatory="must" vendor-bit="must" vendor-id="Ericsson" may-encrypt="no" protected="mustnot">
+        <type type-name="UTF8String"/>
+    </avp>
+    <avp name="SIP-Ringing-Timestamp-Fraction" code="1256" mandatory="must" vendor-bit="must" vendor-id="Ericsson" may-encrypt="no" protected="mustnot">
+        <type type-name="UTF8String"/>
+    </avp>
+
+    <avp name="Supplementary-Service-Identity" code="1130" mandatory="must" vendor-bit="must" vendor-id="Ericsson" may-encrypt="no" protected="mustnot">
+         <type type-name="Enumerated"/>
+        <enum name="Non-Service Specific" code="4294967295"/>
+        <enum name="Forward Unconditional" code="0"/>
+        <enum name="Forward on Busy" code="1"/>
+        <enum name="Forward on No Reply" code="2"/>
+        <enum name="Forward on Not Logged In" code="3"/>
+        <enum name="Forward on Not Reachable" code="4"/>
+        <enum name="Forward Do-Not-Disturb" code="5"/>
+        <enum name="Forward Unconditional (complex rules)" code="10"/>
+        <enum name="Forward on Busy (complex rules)" code="11"/>
+        <enum name="Forward on No Reply (complex rules)" code="12"/>
+        <enum name="Forward on Not Logged In (complex rules)" code="13"/>
+        <enum name="Forward on Not Reachable (complex rules)" code="14"/>
+        <enum name="Forward Do-Not-Disturb (complex rules)" code="15"/>
+        <enum name="Deflection" code="20"/>
+        <enum name="Communication Diversion (CDIV)" code="30"/>
+        <enum name="Communication Diversion No Answer Timeout" code="31"/>
+        <!--
+            Add more codes here
+        -->
+    </avp>
+    <avp name="Supplementary-Service-Action" code="1131" mandatory="must" vendor-bit="must" vendor-id="Ericsson" may-encrypt="no" protected="mustnot">
+         <type type-name="Enumerated"/>
+        <enum name="Use of Service" code="0"/>
+         <!--
+            Add more codes here
+        -->        
+    </avp>
+    <avp name="Common-Policy-Rule-Identity" code="1308" mandatory="must" vendor-bit="must" vendor-id="Ericsson" may-encrypt="no" protected="mustnot">
+         <type type-name="UTF8String"/>
+    </avp>
+    <avp name="Redirecting-Party-Address" code="1133" mandatory="must" vendor-bit="must" vendor-id="Ericsson" may-encrypt="no" protected="mustnot">
+        <type type-name="UTF8String"/>
+    </avp>
+    <avp name="Routing-Call-Type" code="1302" mandatory="must" vendor-bit="must" vendor-id="Ericsson" may-encrypt="no" protected="mustnot">
+        <type type-name="UTF8String"/>
+    </avp>
+    <avp name="CUG-Information" code="2304" mandatory="must" vendor-bit="must" vendor-id="TGPP" may-encrypt="no" protected="mustnot">
+        <type type-name="UTF8String"/>
+    </avp>
+    <avp name="Service-Suppression-Info" code="1371" mandatory="must" vendor-bit="must" vendor-id="Ericsson" may-encrypt="no" protected="mustnot">
+        <grouped>
+            <gavp name="Matched-Regular-Expression"/>
+            <gavp name="Services-To-Suppress"/>
+        </grouped>
+    </avp>
+    <avp name="Matched-Regular-Expression" code="1372" mandatory="must" vendor-bit="must" vendor-id="TGPP" may-encrypt="no" protected="mustnot">
+        <type type-name="UTF8String"/>
+    </avp>
+    <avp name="Services-To-Suppress" code="1373" mandatory="must" vendor-bit="must" vendor-id="TGPP" may-encrypt="no" protected="mustnot">
+        <type type-name="UTF8String"/>
+    </avp>
+    <avp name="UHTZ-Offset" code="1388" mandatory="must" vendor-bit="must" vendor-id="Ericsson" may-encrypt="no" protected="mustnot">
+        <type type-name="UTF8String"/>
+    </avp>
+    <avp name="AS-Type" code="1433" mandatory="must" vendor-bit="must" vendor-id="Ericsson" may-encrypt="no" protected="mustnot">
+        <type type-name="Enumerated"/>
+        <enum name="MMTel Telephony AS" code="0"/>
+        <enum name="Redirection AS" code="1"/>
+        <enum name="Scheduled Conference AS" code="2"/>
+        <enum name="SCC AS" code="3"/>
+        <enum name="Parlay X AS" code="4"/>
+        <enum name="ST AS" code="5"/>
+    </avp>
+</application>
