@@ -17,7 +17,7 @@ Main working classes and traits:
 
 `Avp` and `Message` are standard Diameter absractions.
 `EarlyAvp` and `EarlyMessage` implement lazy encoding/decoding from `Seq[Byte]` to `Message` and `Avp` and back.
-`Message.apply' and `AVP.apply` implement flexible instatiation of `Message` and `Avp` stereotypes
+`Message.apply` and `AVP.apply` implement flexible instatiation of `Message` and `Avp` stereotypes
 
 Usage example1:
 ```
