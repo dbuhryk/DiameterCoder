@@ -32,6 +32,7 @@ object DiameterCoder {
       //TODO: make tail recursion
       Seq(avpRaw) ++ (if (avpRaws.length>len) readNextAvp(avpRaws.drop(len)) else (Seq.empty[Seq[Byte]]))
     }
+    if (bs.size == 0) Seq.empty[EarlyAvp] else
     readNextAvp(bs).map( x => new EarlyAvp {
       override val bodyRaw: Seq[Byte] = x
     })
@@ -122,6 +123,10 @@ object DiameterCoder {
       case Some(avp) if avp.typeName == DictionaryAvpTypeValue.DiameterIdentity => new AvpDiameterIdentity(flags = ea.flags,avp = avp, vendor = vend,new UTFString(ea.dataRaw))
       case Some(avp) if avp.typeName == DictionaryAvpTypeValue.VendorId => new AvpVendorId(flags = ea.flags,avp = avp, vendor = vend,new Integer32(ea.dataRaw))
       case Some(avp) if avp.typeName == DictionaryAvpTypeValue.IPAddress => new AvpIPAddress(flags = ea.flags,avp = avp, vendor = vend,new IPAddress(ea.dataRaw))
+      case Some(avp) if avp.typeName == DictionaryAvpTypeValue.Unsigned32 => new AvpUnsigned32(flags = ea.flags,avp = avp, vendor = vend,new Integer32(ea.dataRaw))
+      case Some(avp) if avp.typeName == DictionaryAvpTypeValue.AppId => new AvpUnsigned32(flags = ea.flags,avp = avp, vendor = vend,new Integer32(ea.dataRaw))
+      case Some(avp) if avp.typeName == DictionaryAvpTypeValue.Time => new AvpUnsigned32(flags = ea.flags,avp = avp, vendor = vend,new Integer32(ea.dataRaw))
+      case Some(avp) if avp.typeName == DictionaryAvpTypeValue.OctetString => new AvpOctetString(flags = ea.flags,avp = avp, vendor = vend, new OctetString(ea.dataRaw))
       //TODO: Add decoding of all types
       case Some(avp:DictionaryAvp with DictionaryAvpEnum) if avp.typeName == DictionaryAvpTypeValue.Enumerated => new AvpEnumerated(flags = ea.flags,avp = avp, vendor = vend,new Integer32(ea.dataRaw))
       case Some(avp:DictionaryAvp with DictionaryAvpGroup) if avp.typeName == DictionaryAvpTypeValue.Grouped => new AvpGrouped(flags = ea.flags,avp = avp, vendor = vend, new Group(ea.dataRaw))

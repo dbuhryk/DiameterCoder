@@ -73,7 +73,8 @@
                     <filereports>WDF TestSuite.txt</filereports>
                     <suites>
                         diameter.DiameterCoderSpec,
-                        diameter.DiameterDictionarySpec
+                        diameter.DiameterDictionarySpec,
+                        diameter.DiameterHexCoderSpec
                     </suites>
                 </configuration>
                 <executions>
