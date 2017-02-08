@@ -7,6 +7,23 @@ Main features:
 * Coder follows [RFC 7633](https://tools.ietf.org/html/rfc6733)
 * Dictionary can be loaded from [Wireshark](https://www.wireshark.org/) Diameter dictionary (`dictionary.xml` with all dependencies)
 * Encoded binarry array can be directly inserted into TCP payload.
+* The sole purpose of the project to build the coder. Implementation of TCP stack functions such as sending and receiving TCP frames, handling TCP links etc. are entirelly out of the scope.
+
+AVP basic types:
+* Grouped
+* Enumerated
+* Integer32
+* OctetString
+
+AVP Extended types:
+* UTF String
+* Unsigned32
+* IP Address
+* Vendor
+* Diameter Identity
+* Time
+* Application Id
+* Vendor Id
 
 Main working classes and traits:
 
@@ -36,31 +53,25 @@ val bytes = emsg.bodyRaw
 
 Usage example2:
 ```
-Message(
-      cmd = "Device-Watchdog",
-      app = "Diameter Common Messages",
-      flag = "",
-      hbh = 1,
-      ete = 1,
-      AVP("Origin-Host","host1"),
-      AVP("Origin-Realm","realm1")
-      AVP("Result-Code",2001)
-    )
+val sample = Seq[Byte](...)
+val earlyMessage = DiameterCoder.decodeEarlyMessage(sample)
+val message = DiameterCoder.decodeMessage(earlyMessage)
 ```
 
-AVP types available:
-* Grouped
-* Integer32
-* IP Address
-* Unsigned32 (via Integer32)
-* UTF String
-* Vendor (via Integer32)
-* Diameter Identity (via UTF String)
-* Enumerated (via Integer32)
+Usage example3:
+```
+val sampleHexString = "0x" +
+"01000080800001010..." //this part is a TCP payload "Diameter Protocol" pased from wireshark via Copy -> ... as a Hex Stream
+val sample = DiameterCoder.encodeOctetString (sampleHexString)
+val earlyMessage = DiameterCoder.decodeEarlyMessage(sample)
+val message = DiameterCoder.decodeMessage(earlyMessage)
+```
 
-Data type codecs available:
-* Groupped AVP
-* Enumerated AVP
-* Integer32
-* IP Address
-* UTFString
+Usage example3:
+```
+val sampleHexString = "0x" +
+"01000080800001010..." //this part is a AVP picked from TCP payload "Diameter Protocol" pased from wireshark via Copy -> ... as a Hex Stream
+val sample = ByteString(DiameterCoder.encodeOctetString(sampleHexString).toArray)
+val earlyAvp = DiameterCoder.decodeEarlyAvp(sample)
+val avp = DiameterCoder.decodeMessage(earlyAvp)
+```
