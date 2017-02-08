@@ -61,7 +61,7 @@ val message = DiameterCoder.decodeMessage(earlyMessage)
 Usage example3:
 ```
 val sampleHexString = "0x" +
-"01000080800001010..." //this part is a TCP payload "Diameter Protocol" pased from wireshark via Copy -> ... as a Hex Stream
+"01000080800001010..." //this part is a TCP payload "Diameter Protocol" pasted from wireshark via Copy -> ... as a Hex Stream
 val sample = DiameterCoder.encodeOctetString (sampleHexString)
 val earlyMessage = DiameterCoder.decodeEarlyMessage(sample)
 val message = DiameterCoder.decodeMessage(earlyMessage)
@@ -70,7 +70,7 @@ val message = DiameterCoder.decodeMessage(earlyMessage)
 Usage example4:
 ```
 val sampleHexString = "0x" +
-"0000010c4000000c000007d1" //this part is a AVP picked from TCP payload "Diameter Protocol" pased from wireshark via Copy -> ... as a Hex Stream
+"0000010c4000000c000007d1" //this part is a AVP picked from TCP payload "Diameter Protocol" pasted from wireshark via Copy -> ... as a Hex Stream
 val sample = ByteString(DiameterCoder.encodeOctetString(sampleHexString).toArray)
 val earlyAvp = DiameterCoder.decodeEarlyAvp(sample)
 val avp = DiameterCoder.decodeMessage(earlyAvp)
