@@ -67,7 +67,7 @@ val earlyMessage = DiameterCoder.decodeEarlyMessage(sample)
 val message = DiameterCoder.decodeMessage(earlyMessage)
 ```
 
-Usage example3:
+Usage example4:
 ```
 val sampleHexString = "0x" +
 "01000080800001010..." //this part is a AVP picked from TCP payload "Diameter Protocol" pased from wireshark via Copy -> ... as a Hex Stream
