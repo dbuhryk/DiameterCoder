@@ -6,7 +6,7 @@ import diameter.ValueContainers._
 import sun.reflect.generics.reflectiveObjects.NotImplementedException
 
 object AVP {
-  def apply(name:Any, value:Any, vendor:Option[Any]=None, flag:Any = AvpFlags(Seq(AvpFlags.Mandatory)))(implicit dictionary:GenericDictionary):Avp = {
+  def apply(name:Any, value:Any, vendor:Option[Any]=None, flag:Any = AvpFlags(Seq()))(implicit dictionary:GenericDictionary):Avp = {
     val _vendor = vendor.map({
       case x:String => DictionaryVendor.apply(x)
       case x:Int => DictionaryVendor.apply(x)
@@ -50,8 +50,16 @@ object AVP {
       case (_, DictionaryAvpTypeValue.DiameterIdentity, _value:String) => AvpUTFString(flags,avp,newVendor,new UTFString(_value))
       case (_, DictionaryAvpTypeValue.DiameterURI, _value:String) => AvpUTFString(flags,avp,newVendor,new UTFString(_value))
       case (_, DictionaryAvpTypeValue.Integer32, _value:Int) => AvpInteger32(flags,avp,newVendor,new Integer32(_value))
+      case (_, DictionaryAvpTypeValue.Integer64, _value:Int) => AvpInteger64(flags,avp,newVendor,new Integer64(_value.toLong))
+      case (_, DictionaryAvpTypeValue.Integer64, _value:Long) => AvpInteger64(flags,avp,newVendor,new Integer64(_value))
       case (_, DictionaryAvpTypeValue.Unsigned32, _value:Int) => AvpUnsigned32(flags,avp,newVendor,new Integer32(_value))
-      case (_avp:DictionaryAvp with DictionaryAvpEnum, DictionaryAvpTypeValue.AppId, _value:Int) => AvpEnumerated(flags,_avp,newVendor,new Integer32(_value))
+      case (_, DictionaryAvpTypeValue.Unsigned64, _value:Int) => AvpUnsigned64(flags,avp,newVendor,new Integer64(_value.toLong))
+      case (_, DictionaryAvpTypeValue.Unsigned64, _value:Long) => AvpUnsigned64(flags,avp,newVendor,new Integer64(_value))
+      case (_avp:DictionaryAvp with DictionaryAvpEnum, DictionaryAvpTypeValue.Unsigned32, _value:String) => AvpUnsigned32(flags,avp,newVendor,new Integer32(_avp.enum.collectFirst({case (x,str) if str == _value => x}).getOrElse(0L).toInt))
+      case (_avp:DictionaryAvp with DictionaryAvpEnum, DictionaryAvpTypeValue.Integer32, _value:String) => AvpUnsigned32(flags,avp,newVendor,new Integer32(_avp.enum.collectFirst({case (x,str) if str == _value => x}).getOrElse(0L).toInt))
+      case (_avp:DictionaryAvp, DictionaryAvpTypeValue.AppId, _value:Int) => AvpUnsigned32(flags,_avp,newVendor,new Integer32(_value))
+      case (_avp:DictionaryAvp with DictionaryAvpEnum, DictionaryAvpTypeValue.AppId, _value:String) => AvpUnsigned32(flags,_avp,newVendor,new Integer32(_avp.enum.collectFirst({case (x,str) if str == _value => x}).getOrElse(0L).toInt))
+
       case (_avp:DictionaryAvp with DictionaryAvpEnum, DictionaryAvpTypeValue.Enumerated, _value:Int) => AvpEnumerated(flags,_avp,newVendor,new Integer32(_value))
       case (_avp:DictionaryAvp with DictionaryAvpEnum, DictionaryAvpTypeValue.Enumerated, _value:String) => AvpEnumerated(flags,_avp,newVendor,new Integer32(_avp.enum.collectFirst({case (x,str) if str == _value => x}).getOrElse(0L).toInt))
       case (_, DictionaryAvpTypeValue.IPAddress, _value:String) => AvpIPAddress(flags,avp,newVendor,new IPAddress(InetAddress.getByName(_value)))

@@ -127,6 +127,7 @@ object DiameterCoder {
       case Some(avp) if avp.typeName == DictionaryAvpTypeValue.AppId => new AvpUnsigned32(flags = ea.flags,avp = avp, vendor = vend,new Integer32(ea.dataRaw))
       case Some(avp) if avp.typeName == DictionaryAvpTypeValue.Time => new AvpUnsigned32(flags = ea.flags,avp = avp, vendor = vend,new Integer32(ea.dataRaw))
       case Some(avp) if avp.typeName == DictionaryAvpTypeValue.OctetString => new AvpOctetString(flags = ea.flags,avp = avp, vendor = vend, new OctetString(ea.dataRaw))
+      case Some(avp) if avp.typeName == DictionaryAvpTypeValue.Unsigned64 => new AvpUnsigned64(flags = ea.flags,avp = avp, vendor = vend,new Integer64(ea.dataRaw))
       //TODO: Add decoding of all types
       case Some(avp:DictionaryAvp with DictionaryAvpEnum) if avp.typeName == DictionaryAvpTypeValue.Enumerated => new AvpEnumerated(flags = ea.flags,avp = avp, vendor = vend,new Integer32(ea.dataRaw))
       case Some(avp:DictionaryAvp with DictionaryAvpGroup) if avp.typeName == DictionaryAvpTypeValue.Grouped => new AvpGrouped(flags = ea.flags,avp = avp, vendor = vend, new Group(ea.dataRaw))
@@ -145,6 +146,8 @@ object DiameterCoder {
   def encodeString(value:String):Seq[Byte] = Converter.stringUTF2Bytes(value)
   def encodeInteger32(value:Int):Seq[Byte] = {encodeInt32(value)}
   def decodeInteger32(seq:Seq[Byte]):Int ={ seq.slice(0,4).foldLeft(0)((a,b)=> (a << 8) + (b & 0xFF)) }
+  def encodeInteger64(value:Long):Seq[Byte] = {encodeInt64(value)}
+  def decodeInteger64(seq:Seq[Byte]):Long = { seq.slice(0,8).foldLeft(0)((a,b)=> (a << 8) + (b & 0xFF)) }
   def encodeIPAddress(value:InetAddress):Seq[Byte] = {
     (value match {
       case ip4:Inet4Address => Seq[Byte](0,1)

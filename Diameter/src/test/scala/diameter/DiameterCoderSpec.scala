@@ -157,7 +157,7 @@ class DiameterCoderSpec  extends FlatSpec with BeforeAndAfterAll{
   }
 
   it should "instantiate AppId as AvpEnumerated from Int" in {
-    val avp = AVP(258,10).asInstanceOf[AvpEnumerated]
+    val avp = AVP(258,10).asInstanceOf[AvpUnsigned32]
     assert (avp.avp.code == 258L)
     assert (avp.avp.typeName == DictionaryAvpTypeValue.AppId)
     assert (avp.value.value == 10)

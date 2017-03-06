@@ -13,11 +13,13 @@ AVP basic types:
 * Grouped
 * Enumerated
 * Integer32
+* Integer64
 * OctetString
 
 AVP Extended types:
 * UTF String
 * Unsigned32
+* Unsigned64
 * IP Address
 * Vendor
 * Diameter Identity

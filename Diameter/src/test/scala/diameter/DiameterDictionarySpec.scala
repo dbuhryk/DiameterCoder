@@ -39,12 +39,6 @@ class DiameterDictionarySpec extends FlatSpec with BeforeAndAfterAll{
     assert (avp.name.contains("Result-Code"))
   }
 
-  it should "locate AVP code with Vendor code" in {
-    val avp = DictionaryAvp(2300,10415)
-    assert (avp.name.contains("Reserved"))
-    assert( avp.vendorid.get.code == 10415L )
-  }
-
   it should "locate AVP name with Vendor code" in {
     val avp = DictionaryAvp("Event",10415)
     assert (avp.code == 825L)
@@ -59,7 +53,7 @@ class DiameterDictionarySpec extends FlatSpec with BeforeAndAfterAll{
 
   it should "locate AVP Enumeration" in {
     val avp = DictionaryAvp("Result-Code").asInstanceOf[DictionaryAvp with DictionaryAvpEnum]
-    assert (avp.typeName == DictionaryAvpTypeValue.Unsigned32)
+    assert (avp.typeName == DictionaryAvpTypeValue.Enumerated)
     assert (avp.enum(2001L) == "DIAMETER_SUCCESS")
   }
 
